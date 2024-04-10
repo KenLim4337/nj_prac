@@ -1,9 +1,10 @@
 from django.shortcuts import render
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login
 from .models import Article, Comment
 from datetime import datetime
+from django.conf import settings
 
 # Home page displaying list of articles
 def home(request):
@@ -16,24 +17,8 @@ def home(request):
 
     return render(request, 'index.html', {
         'articles': Article.objects.all().order_by('pk'),
+        'base_url': settings.BASE_URL,
     })
-
-
-# # Article details/long form content
-# def detail(request, article_id):
-
-
-# # Add new article page
-# def add(request):
-
-
-# # Edit article page
-# def edit(request, article_id):
-
-
-# # Handle article deletion and redirect
-# def delete(request):
-
 
 # Auto-populate database helper
 def autoPopulator():
